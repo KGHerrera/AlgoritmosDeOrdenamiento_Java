@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.Random;
 
-class Alumno{
+class Alumno {
 	private String nombre;
 	private String carrera;
 	private int promedio;
@@ -100,12 +100,12 @@ class OrdenamientoBurbuja{
 	
 }
 
-class OrdenamientoQuickSort{
+class OrdenamientoQuickSort {
 	
 	private static void quicksort(int a[], int primero, int ultimo)
 	{
 		 int i, j, central;
-		 int pivote;
+		 int pivote; 
 		 central = (primero + ultimo)/2;
 		 pivote = a[central];
 		 i = primero;
@@ -113,8 +113,7 @@ class OrdenamientoQuickSort{
 		 do {
 		 	 while (a[i] < pivote) i++;
 		 	 while (a[j] > pivote) j--;
-		 	 if (i <= j)
-		 	 {
+		 	 if (i <= j) {
 		 		 // Se intercambian
 		 		 int aux = a[i];
 				 a[i] = a[j];
@@ -144,7 +143,7 @@ class OrdenamientoQuickSort{
 	private static void quicksort(Alumno a[], int primero, int ultimo)
 	{
 		 int i, j, central;
-		 Alumno pivote;
+		 Alumno pivote; // cambiar pivote por el tipo de dato a ordenar
 		 central = (primero + ultimo)/2;
 		 pivote = a[central];
 		 i = primero;
@@ -160,15 +159,14 @@ class OrdenamientoQuickSort{
 		 	 	 i++;
 		 	 	 j--;
 		 	 }
-		 }while (i <= j);
+		 } while (i <= j);
 		 if (primero < j)
 		 	 quicksort(a, primero, j); // mismo proceso con sublista izqda
 		 if (i < ultimo)
 		 	 quicksort(a, i, ultimo); // mismo proceso con sublista drcha
 	}
 	
-	public static void quicksort(Alumno a[])
-	{
+	public static void quicksort(Alumno a[]) {
 		long tFin, tInicio = System.currentTimeMillis();
 		
 		quicksort(a, 0, a.length-1);
@@ -181,28 +179,30 @@ class OrdenamientoQuickSort{
 public class PruebaAlgoritmosOrdenamiento {
 	public static void main(String[] args) {
 		
-		/*
+		
 		Random random = new Random();
 		
 		int [] vector = new int[10];
 		for (int i = 0; i < vector.length; i++) {
-			vector[i] = 10 + random.nextInt((100 - 30) + 1);
+			vector[i] = random.nextInt(100) + 1;
 		}
 		
+		System.out.println("Vector sin ordenar");
 		System.out.println(Arrays.toString(vector));
 		
 		OrdenamientoQuickSort.quicksort(vector);
-		
+		System.out.println("\nVector ordenado: ");
 		
 		System.out.println(Arrays.toString(vector));
 		
 		Alumno alumnos[] = {new Alumno("Pablo", "ISC", 90), new Alumno("Paco", "isc", 100), new Alumno("Pedro", "ADM", 50)};
 		
-		System.out.println();
+		System.out.println("\nVector sin ordenar");
 		System.out.println(Arrays.toString(alumnos));
 		
+		System.out.println("\nVector ordenado: ");
 		OrdenamientoQuickSort.quicksort(alumnos);
 		System.out.println(Arrays.toString(alumnos));
-		*/
+		
 	}
 }
