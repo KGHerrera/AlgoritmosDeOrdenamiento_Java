@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 class Alumno {
 	private String nombre;
@@ -38,7 +39,7 @@ class Alumno {
 	}
 }
 
-class OrdenamientoBurbuja{
+class AlgoritmosOrdenamiento{
 	
 	public static void burbuja1(int[] datos) {
 		
@@ -61,32 +62,32 @@ class OrdenamientoBurbuja{
 		System.out.println("Tiempo de ordenamiento Burbuja 1: " + (tFin -tInicio));
 	}
 	
-	public static void ordenacionBurbuja2(long []numeros) {
-    	long tInicio = System.nanoTime();
+	public static void burbuja2(int []numeros) {
+    	long tInicio = System.currentTimeMillis();
         for(int i=1; i<numeros.length; i++) {
 			
 			for(int j=0; j<numeros.length-i; j++) {
 				
 				if(numeros[j]>numeros[j+1]) {
-					long aux = numeros[j];
+					int aux = numeros[j];
 					numeros[j] = numeros[j+1];
 					numeros[j+1] = aux;
 				}
 			}
 		}
-        long tFin = System.nanoTime();
+        long tFin = System.currentTimeMillis();
 		System.out.println("Tiempo de ejecucion en ordenamiento por burbuja: " + (tFin-tInicio));
 	}
     
-    public static void ordenacionBurbuja3(long []numeros) {
-       long tInicio = System.nanoTime();
+    public static void burbuja3(int []numeros) {
+       long tInicio = System.currentTimeMillis();
        int i=1;
  	   do {
  		   
  		   for(int j=0; j<numeros.length-i; j++) {
 					
 					if(numeros[j]>numeros[j+1]) {
-						long aux = numeros[j];
+						int aux = numeros[j];
 						numeros[j] = numeros[j+1];
 						numeros[j+1] = aux;
 					}
@@ -94,13 +95,9 @@ class OrdenamientoBurbuja{
  		   
  		   i=1+i;
  	   } while(i<numeros.length);
- 	    long tFin = System.nanoTime();
+ 	    long tFin = System.currentTimeMillis();
 		System.out.println("Tiempo de ejecucion en ordenamiento por burbuja: " + (tFin-tInicio));
     }
-	
-}
-
-class OrdenamientoQuickSort {
 	
 	private static void quicksort(int a[], int primero, int ultimo)
 	{
@@ -174,6 +171,42 @@ class OrdenamientoQuickSort {
 		tFin = System.currentTimeMillis();
 		System.out.println("\nTiempo de ordenamiento: " + (tFin -tInicio));
 	}
+	
+	// ----------- ShellSort ---------------
+	
+	public static void ordenacionShell(int a[]) {
+		 int intervalo, i, j, k;
+		 int n= a.length;
+		 intervalo = n / 2;
+		 while (intervalo > 0)
+		 {
+		 	 for (i = intervalo; i < n; i++)
+		 	 {
+		 	 	 j = i - intervalo;
+		 	 	 while (j >= 0)
+		 	 	 {
+		 	 	 	 k = j + intervalo;
+		 	 	 	 if (a[j] <= a[k])
+		 	 	 	 	 j = -1; // par de elementos ordenado
+		 	 	 	 else
+		 	 	 	 {
+		 	 	 	 	 intercambiar(a, j, j+1);
+		 	 	 	 	 j -= intervalo;
+		 	 	 	 }
+		 	 	 }
+		 	 }
+		 	 intervalo = intervalo / 2;
+		 }
+	}
+	
+	public static void intercambiar(int []a, int i, int j) {
+		 int aux = a[i];
+		 a[i] = a[j];
+		 a[j]= aux ;
+	}
+	
+	
+	
 }
 
 public class PruebaAlgoritmosOrdenamiento {
@@ -187,10 +220,93 @@ public class PruebaAlgoritmosOrdenamiento {
 			vector[i] = random.nextInt(100) + 1;
 		}
 		
+		int opcion = 0;
+		Scanner entrada = new Scanner(System.in);
+		
+		do {
+			System.out.println("\nIntroduce metodo de ordenamiento: ");
+			System.out.println("1) burbuja 1");
+			System.out.println("2) burbuja 2");
+			System.out.println("3) burbuja 3");
+			System.out.println("4) Quicksort");
+			System.out.println("5) Shellsort");
+			System.out.println("20) Salir");
+			System.out.println("Introduce opcion: ");
+			opcion = entrada.nextInt();
+			
+			for (int i = 0; i < vector.length; i++) {
+				vector[i] = random.nextInt(100) + 1;
+			}
+			
+			switch (opcion) {
+				
+			case 1:
+				System.out.println("\nVector sin ordenar");
+				System.out.println(Arrays.toString(vector));
+				
+				AlgoritmosOrdenamiento.burbuja1(vector);
+				System.out.println("\nVector ordenado: ");
+				
+				System.out.println(Arrays.toString(vector));
+				
+				break;
+				
+			case 2:
+				System.out.println("\nVector sin ordenar");
+				System.out.println(Arrays.toString(vector));
+				
+				AlgoritmosOrdenamiento.burbuja2(vector);
+				System.out.println("\nVector ordenado: ");
+				
+				System.out.println(Arrays.toString(vector));
+				break;
+				
+			case 3:
+				System.out.println("\nVector sin ordenar");
+				System.out.println(Arrays.toString(vector));
+				
+				AlgoritmosOrdenamiento.burbuja3(vector);
+				System.out.println("\nVector ordenado: ");
+				
+				System.out.println(Arrays.toString(vector));
+				break;
+				
+			case 4:
+				System.out.println("\nVector sin ordenar");
+				System.out.println(Arrays.toString(vector));
+				
+				AlgoritmosOrdenamiento.quicksort(vector);
+				System.out.println("\nVector ordenado: ");
+				
+				System.out.println(Arrays.toString(vector));
+				break;
+				
+			case 5:
+				System.out.println("\nVector sin ordenar");
+				System.out.println(Arrays.toString(vector));
+				
+				AlgoritmosOrdenamiento.ordenacionShell(vector);
+				System.out.println("\nVector ordenado: ");
+				
+				System.out.println(Arrays.toString(vector));
+				break;
+			default:
+				break;
+			}
+			
+		} while(opcion != 20);
+		
+		
+		
+		
+		
+		/*
+		
+		System.out.println("\nQuickSort");
 		System.out.println("Vector sin ordenar");
 		System.out.println(Arrays.toString(vector));
 		
-		OrdenamientoQuickSort.quicksort(vector);
+		AlgoritmosOrdenamiento.quicksort(vector);
 		System.out.println("\nVector ordenado: ");
 		
 		System.out.println(Arrays.toString(vector));
@@ -201,8 +317,22 @@ public class PruebaAlgoritmosOrdenamiento {
 		System.out.println(Arrays.toString(alumnos));
 		
 		System.out.println("\nVector ordenado: ");
-		OrdenamientoQuickSort.quicksort(alumnos);
+		AlgoritmosOrdenamiento.quicksort(alumnos);
 		System.out.println(Arrays.toString(alumnos));
+		
+		
+		for (int i = 0; i < vector.length; i++) {
+			vector[i] = random.nextInt(100) + 1;
+		}
+		
+		System.out.println("\nShellsort");
+		System.out.println("Vector sin ordenar");
+		System.out.println(Arrays.toString(vector));
+		
+		AlgoritmosOrdenamiento.ordenacionShell(vector);
+		System.out.println("\nVector ordenado: ");
+		System.out.println(Arrays.toString(vector));
+		*/
 		
 	}
 }
