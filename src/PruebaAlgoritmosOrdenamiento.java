@@ -169,6 +169,39 @@ class AlgoritmosOrdenamiento{
 		 a[j]= aux ;
 	}
 	
+	// Radix
+	
+	public static void radix(int []nums) {
+		int[][] bucket = new int[10][nums.length];
+		int[] bucketOfElement = new int[10];
+		int max=0;
+	
+		for(int i = 0 ; i < nums.length;i++) {
+			if(nums[i]>max){
+				max = nums[i];
+			}
+		}
+		
+		int maxLength = (max+"").length();
+		for(int m = 0,n=1;m<maxLength;m++,n*=10) {
+		
+			for(int i = 0 ; i < nums.length;i++) {
+				int digit = nums[i]/n%10;
+			
+				bucket[digit][bucketOfElement[digit]] = nums[i];
+				bucketOfElement[digit]++;
+			}
+			int index = 0;
+			
+			for(int j = 0;j<10;j++) {
+				for(int k = 0 ; k<bucketOfElement[j];k++) {
+					nums[index] = bucket[j][k];
+					index++;
+				}
+				bucketOfElement[j]=0;
+			}
+		}
+	}
 	
 	
 }
@@ -231,6 +264,7 @@ public class PruebaAlgoritmosOrdenamiento {
 			System.out.println("3) burbuja 3");
 			System.out.println("4) Quicksort");
 			System.out.println("5) Shellsort");
+			System.out.println("6) Radix");
 			System.out.println("20) Salir");
 			System.out.println("Introduce opcion: ");
 			opcion = entrada.nextInt();
@@ -291,7 +325,18 @@ public class PruebaAlgoritmosOrdenamiento {
 				
 				System.out.println(Arrays.toString(vector));
 				break;
+			case 6:
+				System.out.println("\nVector sin ordenar");
+				System.out.println(Arrays.toString(vector));
+				
+				AlgoritmosOrdenamiento.radix(vector);
+				System.out.println("\nVector ordenado: ");
+				
+				System.out.println(Arrays.toString(vector));
+				break;
+				
 			default:
+				System.out.println("\nOpcion incorrecta");
 				break;
 			}
 			
