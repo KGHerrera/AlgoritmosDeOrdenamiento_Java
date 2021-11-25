@@ -5,25 +5,22 @@ import java.util.Scanner;
 
 class AlgoritmosOrdenamiento{
 	
-	public static void burbuja1(int[] datos) {
-		
-		long tFin, tInicio = System.currentTimeMillis();
-		int intercambios = 0, comparaciones = 0, recorrido = 0;
-		for (int i = 1; i < datos.length; i++) {
-			for (int j = 0; j < datos.length -i - 1; j++) {
-				comparaciones++;
-				if(datos[j] > datos[j+1]) {
-					intercambios++;
-					int aux = datos[j];
-					datos[j] = datos[j+1];
-					datos[j+1] = aux;
+	 public static void burbuja1(int []numeros) {
+			
+  	   long tInicio = System.currentTimeMillis();
+			for(int i=1; i<=numeros.length-1; i++) {
+				
+				for(int j=0; j<=numeros.length-i-1; j++) {
+					
+					if(numeros[j]>numeros[j+1]) {
+						int aux = numeros[j];
+						numeros[j] = numeros[j+1];
+						numeros[j+1] = aux;
+					}
 				}
-				recorrido++;
 			}
-		}
-		
-		tFin = System.currentTimeMillis();
-		System.out.println("Tiempo de ordenamiento Burbuja 1: " + (tFin -tInicio));
+		long tFin = System.currentTimeMillis();
+		System.out.println("Tiempo de ejecucion en ordenamiento por burbuja: " + (tFin-tInicio));
 	}
 	
 	public static void burbuja2(int []numeros) {
@@ -249,10 +246,12 @@ public class PruebaAlgoritmosOrdenamiento {
 		
 		Random random = new Random();
 		
-		int [] vector = new int[10];
-		for (int i = 0; i < vector.length; i++) {
-			vector[i] = random.nextInt(100) + 1;
+		int [] vect = new int[10];
+		for (int i = 0; i < vect.length; i++) {
+			vect[i] = random.nextInt(100) + 1;
 		}
+		
+		
 		
 		int opcion = 0;
 		Scanner entrada = new Scanner(System.in);
@@ -265,13 +264,12 @@ public class PruebaAlgoritmosOrdenamiento {
 			System.out.println("4) Quicksort");
 			System.out.println("5) Shellsort");
 			System.out.println("6) Radix");
-			System.out.println("20) Salir");
+			System.out.println("7) Salir");
 			System.out.println("Introduce opcion: ");
 			opcion = entrada.nextInt();
 			
-			for (int i = 0; i < vector.length; i++) {
-				vector[i] = random.nextInt(100) + 1;
-			}
+			int vector[] = vect.clone(); 
+			
 			
 			switch (opcion) {
 				
@@ -335,6 +333,9 @@ public class PruebaAlgoritmosOrdenamiento {
 				System.out.println(Arrays.toString(vector));
 				break;
 				
+			case 7:
+				System.out.println("\nSaliendo . . .");
+				break;
 			default:
 				System.out.println("\nOpcion incorrecta");
 				break;
