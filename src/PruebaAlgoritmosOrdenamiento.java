@@ -24,20 +24,18 @@ class AlgoritmosOrdenamiento{
 	}
 	
 	public static void burbuja2(int []numeros) {
-    	long tInicio = System.currentTimeMillis();
-        for(int i=1; i<numeros.length; i++) {
-			
-			for(int j=0; j<numeros.length-i; j++) {
-				
-				if(numeros[j]>numeros[j+1]) {
-					int aux = numeros[j];
+    	int i = 1;
+    	while(i<numeros.length) {
+    		for(int j = 0; j < numeros.length-i; j++) {
+    			if(numeros[j] > numeros[j+1]) {
+    				int aux = numeros[j];
 					numeros[j] = numeros[j+1];
 					numeros[j+1] = aux;
-				}
-			}
-		}
-        long tFin = System.currentTimeMillis();
-		System.out.println("Tiempo de ejecucion en ordenamiento por burbuja: " + (tFin-tInicio));
+    			}
+    		}
+    		i = i + 1;
+    		
+    	}
 	}
     
     public static void burbuja3(int []numeros) {
@@ -341,7 +339,7 @@ public class PruebaAlgoritmosOrdenamiento {
 				break;
 			}
 			
-		} while(opcion != 20);
+		} while(opcion != 7);
 		
 		
 		
